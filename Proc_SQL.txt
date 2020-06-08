@@ -1,0 +1,61 @@
+USE [DSTRAINING]
+GO
+/****** Object:  StoredProcedure [dbo].[__tmp1__BLD_WRK_TableName]    Script Date: 5/28/2020 8:22:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROC [dbo].[__tmp1__BLD_WRK_TableName]
+-- =============================================
+-- Author:	
+-- Create date: 
+-- Description:	RAW to WRK Table
+-- Modified Date: 
+-- =============================================
+AS
+BEGIN
+-- =============================================
+-- Drop Table
+-- =============================================
+IF OBJECT_ID('WRK_TableName') IS NOT NULL
+DROP TABLE [WRK_TableName]
+
+-- =============================================
+-- Create Table
+-- =============================================
+CREATE TABLE [WRK_TableName] 
+(
+	[RowNumber]		INT IDENTITY(1,1)
+	,[AAA]			VARCHAR(100)
+	,[BBB]			VARCHAR(1000)
+	,[CCC]			DATE
+	,[DDD]			INT
+	,[EEE]			FLOAT
+)
+
+-- =============================================
+-- TRUNCATE Table
+-- =============================================
+TRUNCATE TABLE [WRK_TableName]
+
+-- =============================================
+-- INSERT INTO
+-- =============================================
+INSERT INTO [WRK_TableName]
+(
+	[AAA]			
+	,[BBB]			
+	,[CCC]			
+	,[DDD]			
+	,[EEE]
+)
+SELECT
+	[xAAA]
+	,[xBBB]
+	,CONVERT(DATE, [xZZZ],20)
+	,CAST([xWWW] AS INT)
+	,CAST([xVVV] AS FLOAT)
+FROM [RAW_TableName]
+--(x row(s) affected)
+
+END
